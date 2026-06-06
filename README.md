@@ -29,27 +29,28 @@ A stream processor sits on top of Kafka and reads every message as it arrives. E
 
 ---
 
-## Architecture
+## 🏗️ Architecture
+
+```
 Transaction Producer
-↓
+        ↓
 Apache Kafka (financial_transactions topic)
-↓
+        ↓
 Stream Processor (Python)
-↓
+        ↓
 Isolation Forest ML Model
-↓
-/         
-Normal       Anomaly
-↓               ↓
+        ↓
+      /         \
+ Normal       Anomaly
+   ↓               ↓
 Snowflake      GPT-4o Mini
 ALL_TXN              ↓
-Kafka (anomaly_alerts topic)
-↓
-Snowflake FLAGGED_TRANSACTIONS
-↓
-Live Streamlit Dashboard
-
----
+               Kafka (anomaly_alerts topic)
+                     ↓
+               Snowflake FLAGGED_TRANSACTIONS
+                     ↓
+            Live Streamlit Dashboard
+```
 
 ## Tech Stack
 
@@ -169,31 +170,32 @@ Dashboard at **http://localhost:8501**
 
 ---
 
-## Project Structure
+## 📁 Project Structure
+
+```
 realtime-fraud-detection/
 ├── src/
 │   ├── producer/
-│   │   └── transaction_producer.py
+│   │   └── transaction_producer.py    # Generates and streams transactions
 │   ├── consumer/
-│   │   └── stream_processor.py
+│   │   └── stream_processor.py        # Reads stream, runs ML, routes alerts
 │   ├── ml/
-│   │   └── anomaly_detector.py
+│   │   └── anomaly_detector.py        # Isolation Forest model
 │   ├── ai/
-│   │   ├── explanation_engine.py
-│   │   ├── alert_summarizer.py
-│   │   └── nl_query_interface.py
+│   │   ├── explanation_engine.py      # GPT-4 fraud explanations
+│   │   ├── alert_summarizer.py        # Periodic AI risk summaries
+│   │   └── nl_query_interface.py      # Natural language to SQL
 │   ├── snowflake/
-│   │   └── snowflake_loader.py
+│   │   └── snowflake_loader.py        # Snowflake writes with auto-reconnect
 │   └── dashboard/
-│       └── app.py
+│       └── app.py                     # Streamlit live dashboard
 ├── docker/
-│   └── docker-compose.yml
+│   └── docker-compose.yml             # Full infrastructure setup
 ├── config/
-│   ├── .env
-│   └── .env.example
+│   ├── .env                           # Your credentials (never committed)
+│   └── .env.example                   # Credential template
 └── requirements.txt
-
----
+```
 
 ## Performance
 
