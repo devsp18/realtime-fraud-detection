@@ -154,32 +154,31 @@ Dashboard available at **http://localhost:8501**
 ---
 
 ## 📁 Project Structure
+
+```
 realtime-fraud-detection/
 ├── src/
 │   ├── producer/
-│   │   └── transaction_producer.py    # Kafka producer - simulates transactions
+│   │   └── transaction_producer.py    # Generates and streams transactions
 │   ├── consumer/
-│   │   └── stream_processor.py        # Stream processor - ML + routing
+│   │   └── stream_processor.py        # Reads stream, runs ML, routes alerts
 │   ├── ml/
 │   │   └── anomaly_detector.py        # Isolation Forest model
 │   ├── ai/
 │   │   ├── explanation_engine.py      # GPT-4 fraud explanations
 │   │   ├── alert_summarizer.py        # Periodic AI risk summaries
-│   │   └── nl_query_interface.py      # Natural language SQL interface
+│   │   └── nl_query_interface.py      # Natural language to SQL
 │   ├── snowflake/
-│   │   └── snowflake_loader.py        # Snowflake connector + insert logic
+│   │   └── snowflake_loader.py        # Snowflake writes with auto-reconnect
 │   └── dashboard/
-│       └── app.py                     # Streamlit dashboard
+│       └── app.py                     # Streamlit live dashboard
 ├── docker/
-│   └── docker-compose.yml             # Kafka, Zookeeper, Grafana, Kafka UI
+│   └── docker-compose.yml             # Full infrastructure setup
 ├── config/
-│   ├── .env                           # Your credentials (not committed)
-│   └── .env.example                   # Template for credentials
-├── docs/
-├── notebooks/
+│   ├── .env                           # Your credentials (never committed)
+│   └── .env.example                   # Credential template
 └── requirements.txt
-
----
+```
 
 ## 🧠 ML Model Details
 
