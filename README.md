@@ -20,20 +20,20 @@ Every transaction flows through a Kafka stream, gets scored by an Isolation Fore
 ---
 
 ## 🏗️ Architecture
-Transaction Producer (Python + Faker)
+Transaction Producer
 ↓
-Apache Kafka - financial_transactions topic
+Apache Kafka (financial_transactions topic)
 ↓
-Spark-style Stream Processor (Python)
+Stream Processor (Python)
 ↓
-Isolation Forest ML Model (scikit-learn)
+Isolation Forest ML Model
 ↓
-/       
-Normal      Anomaly
-↓             ↓
-Snowflake    GPT-4o Mini Explanation Engine
-ALL_TXN          ↓
-Kafka - anomaly_alerts topic
+/         
+Normal       Anomaly
+↓               ↓
+Snowflake      GPT-4o Mini
+ALL_TXN              ↓
+Kafka (anomaly_alerts topic)
 ↓
 Snowflake FLAGGED_TRANSACTIONS
 ↓
